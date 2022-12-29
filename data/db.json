@@ -1,0 +1,40 @@
+{
+  "projects": [
+    {
+      "id": 4,
+      "title": "buy newsaper",
+      "details": "lorem ipsum",
+      "complete": false
+    },
+    {
+      "id": 2,
+      "title": "buy milk",
+      "details": "lorem ipsum",
+      "complete": true
+    },
+    {
+      "id": 3,
+      "title": "buy car",
+      "details": "lorem ipsum",
+      "complete": true
+    },
+    {
+      "id": 1,
+      "title": "susu",
+      "details": "lorem ipsum",
+      "complete": true
+    },
+    {
+      "title": "make ice cream",
+      "details": "haahacxz",
+      "complete": false,
+      "id": 5
+    },
+    {
+      "title": "tittle",
+      "details": "details",
+      "complete": false,
+      "id": 6
+    }
+  ]
+}
