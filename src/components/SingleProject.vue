@@ -50,16 +50,12 @@ export default {
     },
 
     async toggleComplete() {
-      
-        let res = await projectFireStore
-          .collection("projects")
-          .doc(this.project.id)
-          .update({ complete: !this.project.complete });
+      let res = await projectFireStore
+        .collection("projects")
+        .doc(this.project.id)
+        .update({ complete: !this.project.complete });
 
-        this.$emit("complete", this.project.id);
-      
-
-   
+      this.$emit("complete", this.project.id);
     },
   },
 };
@@ -91,5 +87,15 @@ export default {
 }
 .edit {
   color: black;
+}
+@media(max-width : 769px){
+  .details{
+    width: 90%;
+  }
+}
+@media (max-width: 470px){
+  .details{
+    width: 90%;
+  }
 }
 </style>

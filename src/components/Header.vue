@@ -51,4 +51,12 @@ export default {
 .logout{
     cursor: pointer;
 }
+@media(max-width : 425px){
+  .login{
+    font-size: 20px;
+  }
+  .header{
+    height: 55px;
+  }
+}
 </style>

@@ -1,13 +1,13 @@
 <template>
   <Navbar />
-  <form @submit.prevent="handleEdit" class="editform addform">
+  <form @submit.prevent="handleEdit" class="editform addform mt-5">
     <div class="d-flex gap-3">
       <label class="label">Title</label>
-      <input type="text" class="form-control" v-model="title" />
+      <input type="text" class="input-1" v-model="title" />
     </div>
     <div class="d-flex gap-3">
       <label class="label">details</label>
-      <textarea v-model="details" class="form-control txt-area"></textarea>
+      <textarea v-model="details" class="input-2"></textarea>
     </div>
 
     <button class="btn btn-primary">Update Project</button>
@@ -38,7 +38,6 @@ export default {
       this.details = obj.details;
     };
     editForm();
-
   },
   methods: {
     async handleEdit() {
@@ -47,7 +46,6 @@ export default {
         .doc(this.id)
         .update({ title: this.title, details: this.details });
       this.$router.push("/home");
-
     },
   },
 };
@@ -73,6 +71,16 @@ export default {
 }
 .txt-area {
   width: 400px !important;
+}
+.input-1{
+  width: 50vw !important;
+  height: 6vh;
+  border-radius: 10px;
+}
+.input-2{
+  width: 50vw !important;
+  height: 8vh;
+  border-radius: 10px;
 }
 .label {
   font-weight: bold;

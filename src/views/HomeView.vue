@@ -2,7 +2,7 @@
   <Navbar />
   <div class="home">
     <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id">
+      <div v-for="project in projects" :key="project.id" >
         <SingleProject
           :project="project"
           @delete="handleDelete"
