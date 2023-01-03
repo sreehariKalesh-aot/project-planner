@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <form @submit.prevent="handleEdit" class="editform addform mt-5">
+  <form @submit.prevent="handleEdit({title,details,id})" class="editform addform mt-5">
     <div class="d-flex gap-3">
       <label class="label">Title</label>
       <input type="text" class="input-1" v-model="title" />
@@ -17,6 +17,7 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import { projectFireStore } from "@/firebase/config";
+import {mapActions} from "vuex"
 export default {
   components: { Navbar },
   props: ["id"],
@@ -25,6 +26,7 @@ export default {
       title: "",
       details: "",
       uri: "http://localhost:3000/projects/" + this.id,
+
     };
   },
   mounted() {
@@ -40,13 +42,8 @@ export default {
     editForm();
   },
   methods: {
-    async handleEdit() {
-      let res = await projectFireStore
-        .collection("projects")
-        .doc(this.id)
-        .update({ title: this.title, details: this.details });
-      this.$router.push("/home");
-    },
+    ...mapActions(['handleEdit'])
+
   },
 };
 </script>

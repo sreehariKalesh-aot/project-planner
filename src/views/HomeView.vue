@@ -15,11 +15,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Navbar from "../components/Navbar.vue";
 import SingleProject from "../components/SingleProject.vue";
-// import firebase from "firebase";
-// import { projectFireStore } from "../firebase/config";
 import { mapActions } from "vuex";
 import { mapState } from "vuex";
 
@@ -37,11 +34,6 @@ export default {
     this.fetchData();
   },
   methods: {
-    // handleDelete(id) {
-    //   this.projects = this.projects.filter((item) => item.id != id);
-    // },
-
-
     ...mapActions(["fetchData"]),
   },
 };

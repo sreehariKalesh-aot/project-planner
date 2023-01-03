@@ -1,11 +1,12 @@
 import { createStore } from "vuex";
 import firebase from "firebase";
 import { projectFireStore } from "../firebase/config";
-
 import router from "../router";
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 export default createStore({
-    
   state: {
     projects: [],
     // userId: null,
@@ -29,7 +30,6 @@ export default createStore({
       state.projects = state.projects.filter((item) => item.id != id);
     },
   },
-
   actions: {
     async fetchData({ commit }) {
       try {
@@ -57,34 +57,42 @@ export default createStore({
         .update({ complete: !project.complete });
 
       commit("handleComplete", project.id);
-
     },
 
     async deleteProject({ commit }, id) {
       await projectFireStore.collection("projects").doc(id).delete();
 
       commit("deleteProject", id);
-
     },
 
-    //   async handleSubmit(_,title , details) {
-    //     const user = firebase.auth().currentUser;
+    async handleSubmit({ commit }, payload) {
+      const user = firebase.auth().currentUser;
 
-    //     let project = {
-    //       user: user.uid,
-    //       title: title,
-    //       details: "details",
-    //       complete: false,
-    //     };
-    //     console.log(project);
+      let project = {
+        user: user.uid,
+        title: payload.title,
+        details: payload.details,
+        complete: false,
+      };
+      console.log(project);
 
-    //     let res = await projectFireStore.collection("projects").add(project);
+      let res = await projectFireStore.collection("projects").add(project);
 
-    //     this.toast.success("Project added successfully");
+        toast.success("Project added successfully");
 
-    //     this.$router.push("/home");
+      router.push("/home");
+    },
 
-    //   },
+    async handleEdit({ commit }, payload) {
+      let res = await projectFireStore
+        .collection("projects")
+        .doc(payload.id)
+        .update({ title: payload.title, details: payload.details });
+
+      router.push("/home");
+
+      console.log(payload.title, payload.id);
+    },
   },
   modules: {},
 });
