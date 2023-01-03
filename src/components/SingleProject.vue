@@ -8,10 +8,12 @@
       <router-link :to="{ name: 'EditProject', params: { id: project.id } }">
         <span class="material-icons edit">edit</span>
       </router-link>
-      <span class="material-icons delete" @click="deleteProject"> delete </span>
+      <span class="material-icons delete" @click="deleteProject(project.id)">
+        delete
+      </span>
       <span
         class="material-icons done"
-        @click="toggleComplete"
+        @click="toggleComplete(project)"
         v-if="!project.complete"
       >
         done
@@ -19,7 +21,7 @@
       <!-- <span class="material-icons" ></span> -->
       <span
         class="material-icons"
-        @click="toggleComplete"
+        @click="toggleComplete(project)"
         v-if="project.complete"
       >
         close
@@ -29,7 +31,8 @@
 </template>
 
 <script>
-import { projectFireStore } from "@/firebase/config";
+import { mapActions } from "vuex";
+
 export default {
   props: ["project"],
   data() {
@@ -40,23 +43,7 @@ export default {
   },
 
   methods: {
-    async deleteProject() {
-      await projectFireStore
-        .collection("projects")
-        .doc(this.project.id)
-        .delete();
-
-      this.$emit("delete", this.project.id);
-    },
-
-    async toggleComplete() {
-      let res = await projectFireStore
-        .collection("projects")
-        .doc(this.project.id)
-        .update({ complete: !this.project.complete });
-
-      this.$emit("complete", this.project.id);
-    },
+    ...mapActions(["toggleComplete", "deleteProject"]),
   },
 };
 </script>
@@ -88,13 +75,13 @@ export default {
 .edit {
   color: black;
 }
-@media(max-width : 769px){
-  .details{
+@media (max-width: 769px) {
+  .details {
     width: 90%;
   }
 }
-@media (max-width: 470px){
-  .details{
+@media (max-width: 470px) {
+  .details {
     width: 90%;
   }
 }

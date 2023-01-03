@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <form @submit.prevent="handleSubmit" class="addform mt-5">
+  <form @submit.prevent="handleSubmit(title , details)" class="addform mt-5">
     <div class="d-flex gap-3">
       <label class="label">Title</label>
       <input type="text" class="input-1 p-2"  v-model="title" />
@@ -19,6 +19,7 @@ import Navbar from "../components/Navbar.vue";
 import firebase from "firebase/app";
 
 import { useToast } from "vue-toastification";
+import {mapActions} from "vuex";
 
 export default {
   components: {
@@ -36,6 +37,7 @@ export default {
     return { toast };
   },
   methods: {
+
     async handleSubmit() {
       const user = firebase.auth().currentUser;
 
@@ -53,6 +55,9 @@ export default {
 
       this.$router.push("/home");
     },
+
+    // ...mapActions(['handleSubmit'])
+
   },
 };
 </script>

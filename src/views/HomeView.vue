@@ -2,7 +2,7 @@
   <Navbar />
   <div class="home">
     <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id" >
+      <div v-for="project in projects" :key="project.id">
         <SingleProject
           :project="project"
           @delete="handleDelete"
@@ -18,8 +18,10 @@
 // @ is an alias to /src
 import Navbar from "../components/Navbar.vue";
 import SingleProject from "../components/SingleProject.vue";
-import firebase from "firebase";
-import { projectFireStore } from "../firebase/config";
+// import firebase from "firebase";
+// import { projectFireStore } from "../firebase/config";
+import { mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "HomeView",
@@ -27,44 +29,20 @@ export default {
     SingleProject,
     Navbar,
   },
-  data() {
-    return {
-      projects: [],
-
-      userId: null,
-    };
+  computed: {
+    ...mapState(["projects"]),
   },
+
   mounted() {
-    const fetchData = async () => {
-      try {
-     
-        this.userId = window.sessionStorage.getItem("userID");
-
-        const res = await projectFireStore
-          .collection("projects")
-          .where("user", "==", this.userId)
-          .get();
-        console.log(res.docs);
-        this.projects = res.docs.map((doc) => {
-          return { ...doc.data(), id: doc.id };
-        });
-        console.log(this.projects);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-
+    this.fetchData();
   },
   methods: {
-    handleDelete(id) {
-      this.projects = this.projects.filter((item) => item.id != id);
-    },
-    handleComplete(id) {
-      let p = this.projects.find((project) => project.id === id);
-      p.complete = !p.complete;
-    },
+    // handleDelete(id) {
+    //   this.projects = this.projects.filter((item) => item.id != id);
+    // },
+
+
+    ...mapActions(["fetchData"]),
   },
 };
 </script>
