@@ -9,7 +9,6 @@
       <label class="label">details</label>
       <textarea v-model="details" class="input-2"></textarea>
     </div>
-
     <button class="btn btn-primary">Update Project</button>
   </form>
 </template>

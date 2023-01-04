@@ -19,6 +19,16 @@ export default {
       uid: null,
     };
   },
+  mounted() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$router.push("/home");
+        console.log(user);
+      } else {
+        this.$router.push("/");
+      }
+    });
+  },
   methods: {
     googleSignIn: function () {
       const provider = new firebase.auth.GoogleAuthProvider();

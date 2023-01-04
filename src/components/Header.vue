@@ -1,13 +1,15 @@
 <template>
   <div class="header">
-    <h1 class="login ps-3 pt-3" v-if="user">{{user.displayName}}</h1>
+    <h1 class="login ps-3 pt-3" v-if="user">{{ user.displayName }}</h1>
     <h1 class="login ps-3 pt-3" v-if="!user">Login</h1>
-    <h1 class="login ps-3 pt-3 pe-3 logout" v-if="user" @click="logout">Logout</h1>
+    <h1 class="login ps-3 pt-3 pe-3 logout" v-if="user" @click="logout">
+      Logout
+    </h1>
   </div>
 </template>
 
 <script>
-import firebase from "firebase"
+import firebase from "firebase";
 export default {
   data() {
     return {
@@ -19,18 +21,15 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       this.user = user;
     });
-
   },
-    methods: {
-    async logout () {
-      sessionStorage.removeItem('userID')
+  methods: {
+    async logout() {
+      sessionStorage.removeItem("userID");
       // Log the user out
-      await firebase.auth().signOut()
-      this.$router.push("/")
-
-      
-    }
-  }
+      await firebase.auth().signOut();
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
@@ -48,14 +47,14 @@ export default {
   color: white;
   font-size: 25px;
 }
-.logout{
-    cursor: pointer;
+.logout {
+  cursor: pointer;
 }
-@media(max-width : 425px){
-  .login{
+@media (max-width: 425px) {
+  .login {
     font-size: 20px;
   }
-  .header{
+  .header {
     height: 55px;
   }
 }
