@@ -72,6 +72,8 @@ export default createStore({
         user: user.uid,
         title: payload.title,
         details: payload.details,
+        isInternal : payload.isChecked,
+        clientName : payload.clientName,
         complete: false,
       };
       console.log(project);
@@ -87,7 +89,7 @@ export default createStore({
       let res = await projectFireStore
         .collection("projects")
         .doc(payload.id)
-        .update({ title: payload.title, details: payload.details });
+        .update({ title: payload.title, details: payload.details , clientName :payload.clientName , isInternal : payload.isChecked });
 
       router.push("/home");
 

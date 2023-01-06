@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <form @submit.prevent="handleEdit({title,details,id})" class="editform addform mt-5">
+  <form @submit.prevent="handleEdit({title,details,id,isChecked,clientName})" class="editform addform mt-5">
     <div class="d-flex gap-3">
       <label class="label">Title</label>
       <input type="text" class="input-1" v-model="title" />
@@ -9,6 +9,16 @@
       <label class="label">details</label>
       <textarea v-model="details" class="input-2"></textarea>
     </div>
+
+    <div class="form-check form-switch d-flex gap-3">
+      <label class="form-check-label" for="flexSwitchCheckDefault"
+        >Is it an internal Project ?</label>
+      <input type="checkbox" v-model="isChecked" @click="handleCheckbox">
+      </div>
+      <div v-if="isChecked" class="d-flex gap-3">
+        <label>Name of the client</label>
+        <input type="text" v-model="clientName">
+      </div>
     <button class="btn btn-primary">Update Project</button>
   </form>
 </template>
@@ -24,6 +34,8 @@ export default {
     return {
       title: "",
       details: "",
+      isChecked: false,
+      clientName: null,
       uri: "http://localhost:3000/projects/" + this.id,
 
     };
@@ -37,11 +49,19 @@ export default {
       let obj = { ...res.data(), id: res.id };
       this.title = obj.title;
       this.details = obj.details;
+      this.clientName = obj.clientName;
+      this.isChecked = obj.isInternal
     };
     editForm();
   },
   methods: {
-    ...mapActions(['handleEdit'])
+    ...mapActions(['handleEdit']),
+    handleCheckbox(){
+      this.isChecked = !this.isChecked
+      if(!this.isChecked){
+        this.clientName = null
+      }
+    }
 
   },
 };

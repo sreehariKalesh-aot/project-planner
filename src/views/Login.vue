@@ -19,7 +19,7 @@ export default {
       uid: null,
     };
   },
-  mounted() {
+  beforeMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$router.push("/home");
