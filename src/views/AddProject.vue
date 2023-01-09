@@ -14,7 +14,7 @@
         >Is it an internal Project ?</label>
       <input type="checkbox" v-model="isChecked" @click="handleCheckbox">
       </div>
-      <div v-if="isChecked" class="d-flex gap-3">
+      <div v-if="!isChecked" class="d-flex gap-3">
         <label>Name of the client</label>
         <input type="text" v-model="clientName">
       </div>
@@ -45,8 +45,8 @@ export default {
 
     handleCheckbox(){
       this.isChecked = !this.isChecked
-      if(!this.isChecked){
-           this.clientName = null
+      if(this.isChecked){
+        this.clientName = null
       }
     }
   

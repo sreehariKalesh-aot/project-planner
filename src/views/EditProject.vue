@@ -15,7 +15,7 @@
         >Is it an internal Project ?</label>
       <input type="checkbox" v-model="isChecked" @click="handleCheckbox">
       </div>
-      <div v-if="isChecked" class="d-flex gap-3">
+      <div v-if="!isChecked" class="d-flex gap-3">
         <label>Name of the client</label>
         <input type="text" v-model="clientName">
       </div>
@@ -35,7 +35,7 @@ export default {
       title: "",
       details: "",
       isChecked: false,
-      clientName: null,
+      clientName: "",
       uri: "http://localhost:3000/projects/" + this.id,
 
     };
@@ -56,9 +56,12 @@ export default {
   },
   methods: {
     ...mapActions(['handleEdit']),
+
     handleCheckbox(){
+
       this.isChecked = !this.isChecked
-      if(!this.isChecked){
+
+      if(this.isChecked){
         this.clientName = null
       }
     }
