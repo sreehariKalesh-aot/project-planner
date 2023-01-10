@@ -19,16 +19,16 @@ export default {
       uid: null,
     };
   },
-  beforeMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.$router.push("/home");
-        console.log(user);
-      } else {
-        this.$router.push("/");
-      }
-    });
-  },
+  // beforeMount() {
+  //   firebase.auth().onAuthStateChanged((user) => {
+  //     if (user) {
+  //       this.$router.push("/home");
+  //       console.log(user);
+  //     } else {
+  //       this.$router.push("/");
+  //     }
+  //   });
+  // },
   methods: {
     googleSignIn: function () {
       const provider = new firebase.auth.GoogleAuthProvider();
