@@ -1,8 +1,8 @@
 <template>
-  <Navbar />
+  <Navbar @filterChange="current = $event" :current="current" />
   <div class="home">
     <div v-if="projects.length">
-      <div v-for="project in projects" :key="project.id">
+      <div v-for="project in filtered" :key="project.id">
         <SingleProject
           :project="project"
           @delete="handleDelete"
@@ -22,12 +22,26 @@ import { mapState } from "vuex";
 
 export default {
   name: "HomeView",
+  data(){
+    return{
+      current: "active"
+    }
+  },
   components: {
     SingleProject,
     Navbar,
   },
   computed: {
     ...mapState(["projects"]),
+
+    filtered(){
+      if(this.current === "active"){
+        return this.projects.filter(obj=>obj.complete === false)
+      }
+       if(this.current === "completed"){
+        return this.projects.filter(obj=>obj.complete === true)
+      }
+    }
   },
 
   mounted() {
