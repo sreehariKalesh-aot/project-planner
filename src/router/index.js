@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import CompletedProject from '../views/CompletedProject.vue'
 import AddProject from '../views/AddProject.vue'
 import EditProject from '../views/EditProject.vue'
 import Login from "../views/Login.vue"
@@ -45,6 +46,11 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomeView,
+  },
+  {
+    path: '/completed',
+    name: 'completed',
+    component: CompletedProject,
   },
   {
     path: '/add',

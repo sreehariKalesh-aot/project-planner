@@ -36,7 +36,7 @@ export default {
       details: "",
       isChecked: false,
       clientName: "",
-      uri: "http://localhost:3000/projects/" + this.id,
+      // uri: "http://localhost:3000/projects/" + this.id,
 
     };
   },

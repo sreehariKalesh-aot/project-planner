@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "udemy-vue-5ecc3"
-  }
+    "default": "test-divii",
+    "project planner": "test-divii"
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -1,8 +1,8 @@
 <template>
   <nav class="d-flex gap-5 justify-content-center mt-3 mb-4" >
-    <router-link class="link" :to="{ name: 'home' }"><li  @click="handleFilter('active')" :class="{active: current === 'active'}">projects</li> </router-link>
-    <router-link class="link" :to="{ name: 'AddProject' }"><li >Add a new Project</li> </router-link>
-    <router-link class="link" :to="{ name: 'home' }"><li @click="handleFilter('completed')" :class="{active: current === 'completed'}">Completed projects</li> </router-link>
+    <router-link class="link" :to="{ name: 'home' }" ><li  @click="handleFilter('active')">projects</li> </router-link>
+    <router-link class="link" :to="{ name: 'AddProject' }" ><li >Add a new Project</li> </router-link>
+    <router-link class="link" :to="{ name: 'completed' }"><li @click="handleFilter('completed')">Completed projects</li> </router-link>
   </nav>
 </template>
 
@@ -22,9 +22,12 @@ export default {
 </script>
 
 <style>
-  .active{
-    color: blue;
+  .router-link-active{
+    color: blue !important;
+    border-bottom-color: blue !important;
+    
   }
+
   li{
     list-style: none;
     text-decoration: none;
