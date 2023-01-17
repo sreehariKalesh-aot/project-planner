@@ -43,7 +43,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["toggleComplete", "deleteProject"]),
+    ...mapActions(["toggleComplete", "deleteProject"])
   },
 };
 </script>

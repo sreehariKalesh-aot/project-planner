@@ -33,7 +33,7 @@ export default createStore({
       cp.complete = !cp.complete
       console.log(p.complete);
       
-     
+      window.location.reload()
       console.log(p)
 
     },
@@ -63,22 +63,21 @@ export default createStore({
       }
     },
 
-    
    async fetchCompleted() {
 
-    const uid = window.sessionStorage.getItem("userID")
-    const data = {
-         userId: uid 
-      };
-      
-  firebase.functions().httpsCallable("getCompletedProjects")(data).then((result) => {
-      this.state.filteredArray = result.data;
-      console.log(result.data);
-      console.log(this.state.filteredArray);
+      const uid = window.sessionStorage.getItem("userID")
+      const data = {
+          userId: uid 
+        };
+        
+    firebase.functions().httpsCallable("getCompletedProjects")(data).then((result) => {
+        this.state.filteredArray = result.data;
+        console.log(result.data);
+        console.log(this.state.filteredArray);
 
-    }) .catch(err => {
-          console.log("this is the error:  ",err)
-      });
+      }) .catch(err => {
+            console.log("this is the error:  ",err)
+        });
 
   },
 
